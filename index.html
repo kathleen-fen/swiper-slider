@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="/swiper-bundle.min.css"
+    />
+
+    <!-- Demo styles -->
+    <style>
+      html,
+      body {
+        position: relative;
+        height: 70%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .swiper-container {
+        width: 100%;
+        height: 100%;
+      }
+      .next-arrow::after {
+        content: "\000BB";
+        font-size: 20px;
+        color: #0069b4;
+
+      }
+      .prev-arrow::after {
+        content: "\000BB";
+        font-size: 20px;
+        color: #0069b4;
+
+      }
+
+      .prev-arrow {
+        transform: rotate(-90deg);
+        top: 5px;
+        right: 50%;
+        margin-right: 10px;
+        opacity: 1;
+        transition: opacity 5s ease-in;
+
+      }
+      .next-arrow {
+        transform: rotate(90deg);
+        bottom: 5px;
+        right: 50%;
+        margin-right: 10px;
+        opacity: 1;
+        transition: opacity 5s ease-in;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .disabled {
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+      }
+      .wrapper {
+        width: 30%;
+      }
+      .swiper-prev, .swiper-next {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: transparent;
+        width: 100%;
+        height: 30px;
+        margin:  5px 0;
+        transition: opacity 0.5s ease-in;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Swiper -->
+    <div class="wrapper">
+      <div class="swiper-prev disabled">
+        <div class="prev-arrow"></div>
+      </div>
+      <div class="swiper-container mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
+          <div class="swiper-slide">Slide 4</div>
+          <div class="swiper-slide">Slide 5</div>
+          <div class="swiper-slide">Slide 6</div>
+          <div class="swiper-slide">Slide 7</div>
+          <div class="swiper-slide">Slide 8</div>
+          <div class="swiper-slide">Slide 9</div>
+        </div>
+      </div>
+      <div class="swiper-next">
+        <div class="next-arrow"></div>
+      </div>
+
+    </div>
+
+
+    <!-- Swiper JS -->
+    <script src="/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        direction: "vertical",
+        slidesPerView: 3,
+        autoplay: false,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+      document.querySelector('.swiper-prev').addEventListener("click", function() {
+        console.log('prev');
+        swiper.slidePrev(444, true);
+
+      })
+      document.querySelector('.swiper-next').addEventListener("click", function() {
+        console.log('next');
+        swiper.slideNext(444, true);
+
+      })
+      swiper.on("activeIndexChange", function(e) {
+        console.log(e);
+        if(e.isBeginning) {
+          document.querySelector('.swiper-prev').classList.add('disabled');
+        } else {
+          document.querySelector('.swiper-prev').classList.remove('disabled');
+        }
+        if(e.isEnd) {
+          document.querySelector('.swiper-next').classList.add('disabled');
+        } else {
+          document.querySelector('.swiper-next').classList.remove('disabled');
+        }
+      })
+    </script>
+  </body>
+</html>
